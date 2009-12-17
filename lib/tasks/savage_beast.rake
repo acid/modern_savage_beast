@@ -10,8 +10,10 @@ SAVAGE_BEAST_BASE_DIR = File.join(File.dirname(__FILE__), "../..")
 namespace :savage_beast do 
 	desc "Add database tables for bloggity"
 	task :bootstrap_db => :environment do
-	  CreateSavageTables.up
-		puts "Savage Beast tables created successfully!"
+    migration_path = RAILS_ROOT + "/db/migrate/#{Time.now.utc.strftime("%Y%m%d%H%M%S")}_create_savage_tables.rb"
+    savage_beast_migration = File.join(SAVAGE_BEAST_BASE_DIR, 'db/migrate/', '001_create_savage_tables.rb')
+    FileUtils.cp(savage_beast_migration, File.expand_path(migration_path))
+		puts "Savage Beast migration copied to db/migrate.  Run rake db:migrate to complete the db bootstrap process."
 	end
 
 	desc "Copy the stylesheets and Javascripts used natively by bloggity into host app's public directory"
