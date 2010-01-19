@@ -10,7 +10,9 @@
 	<%= javascript_include_tag "prototype", "effects" %>
 <% unless @feed_icons.blank? -%>
   <% @feed_icons.each do |feed| -%>
-  <%= auto_discovery_link_tag :rss, feed[:url], :title => "Subscribe to '#{feed[:title]}'" %>
+<!-- No RSS for now
+  <%# auto_discovery_link_tag :rss, feed[:url], :title => "Subscribe to '#{feed[:title]}'" %>
+-->
   <% end -%>
 <% end -%>
   <%= head_extras %>
