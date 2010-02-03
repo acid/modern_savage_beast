@@ -50,7 +50,12 @@ class TopicsController < ApplicationController
     Topic.transaction do
 	    @topic  = @forum.topics.build(params[:topic])
       assign_protected
-      @post       = @topic.posts.build(params[:topic])
+      @post = @topic.posts.build(params[:topic])
+
+      # The tags don't seem to set properly with a build call, so we check
+      # for them manually and set them if found
+      @post.body_list = params[:topic]['body_list'] if params[:topic]['body_list']
+
       @post.topic = @topic
       @post.user  = current_user
       # only save topic if post is valid so in the view topic will be a new record if there was an error

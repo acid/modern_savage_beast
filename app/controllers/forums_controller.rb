@@ -32,7 +32,11 @@ class ForumsController < ApplicationController
   # new renders new.html.erb  
   def create
     @forum.attributes = params[:forum]
-    @forum.save!
+
+    unless @forum.save
+      render :new and return
+    end
+
     respond_to do |format|
       format.html { redirect_to @forum }
       format.xml  { head :created, :location => forum_url(@forum, :format => :xml) }

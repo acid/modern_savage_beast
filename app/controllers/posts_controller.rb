@@ -18,8 +18,7 @@ class PostsController < ApplicationController
   end
 
   def search		
-    conditions = params[:q].blank? ? nil : Post.send(:sanitize_sql, ["LOWER(#{Post.table_name}.body) LIKE ?", "%#{params[:q]}%"])
-    @posts = Post.paginate @@query_options.merge(:conditions => conditions, :page => params[:page], :count => {:select => "#{Post.table_name}.id"}, :order => post_order)
+    @posts = Post.search(params[:q], :page => params[:page])
     @users = User.find(:all, :select => 'distinct *', :conditions => ['id in (?)', @posts.collect(&:user_id).uniq]).index_by(&:id)
     render_posts_or_xml :index
   end
@@ -58,6 +57,7 @@ class PostsController < ApplicationController
     end
     @forum = @topic.forum
     @post  = @topic.posts.build(params[:post])
+    @post.body_list = params[:post]['body_list'] if params[:post]['body_list']
     @post.user = current_user
     @post.save!
     respond_to do |format|
@@ -85,6 +85,7 @@ class PostsController < ApplicationController
   
   def update
     @post.attributes = params[:post]
+    @post.body_list = params[:post]['body_list'] if params[:post]['body_list']
     @post.save!
   rescue ActiveRecord::RecordInvalid
     flash[:bad_reply] = 'An error occurred'[:error_occured_message]
