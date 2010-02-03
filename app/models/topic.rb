@@ -1,5 +1,7 @@
 class Topic < ActiveRecord::Base
   validates_presence_of :forum, :user, :title
+  validates_size_of :title, :maximum => 255
+
   before_create  :set_default_replied_at_and_sticky
   before_update  :check_for_changing_forums
   after_save     :update_forum_counter_cache

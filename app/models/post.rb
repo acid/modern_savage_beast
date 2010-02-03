@@ -13,6 +13,8 @@ class Post < ActiveRecord::Base
   after_destroy :update_cached_fields
 
   validates_presence_of :user_id, :body, :topic
+  validates_size_of :body, :maximum => 2**15 # 32k
+  
   attr_accessible :body	
 
   acts_as_taggable_on :bodies

@@ -2,6 +2,9 @@ class Forum < ActiveRecord::Base
   acts_as_list
 
   validates_presence_of :name
+  validates_length_of :name, :maximum => 255
+  validates_length_of :description, :maximum => 255
+  validates_numericality_of :position
 
   has_many :moderatorships, :dependent => :delete_all
   has_many :moderators, :through => :moderatorships, :source => :user
