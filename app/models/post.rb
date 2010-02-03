@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
-  def self.per_page() 25 end
+  def self.per_page
+    10
+  end
 
   belongs_to :forum
   belongs_to :user
@@ -12,7 +14,27 @@ class Post < ActiveRecord::Base
 
   validates_presence_of :user_id, :body, :topic
   attr_accessible :body	
+
+  acts_as_taggable_on :bodies
 	
+  def self.search(text, options = {})
+    query = text.downcase
+    page = options[:page] || 1
+       
+    # Using acts_as_taggable_on to return posts that have been tagged with the query string   
+    tagged_posts = tagged_with(query) 
+    
+    conditions = "lower(posts.body) LIKE :query"
+    conditions << " OR posts.id IN (:post_ids)" unless tagged_posts.empty?
+            
+    paginate(
+      :page => page,
+      :order => "posts.created_at DESC",
+      :conditions => [conditions, {:query => "%#{query}%", :post_ids => tagged_posts}],
+      :include => [:topic, :forum]
+    )
+  end
+
   def editable_by?(user)
     user && (user.id == user_id || user.admin? || user.moderator_of?(forum_id))
   end

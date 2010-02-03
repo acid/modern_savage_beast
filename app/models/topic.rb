@@ -19,10 +19,12 @@ class Topic < ActiveRecord::Base
   belongs_to :replied_by_user, :foreign_key => "replied_by", :class_name => "User"
 
   attr_accessible :title
-  # to help with the create form
+
+  # To help with the create form
   attr_accessor :body
-	
-	def hit!
+  attr_accessor :body_list
+  
+  def hit!
     self.class.increment_counter :hits, id
   end
 
@@ -83,7 +85,7 @@ class Topic < ActiveRecord::Base
         forum_conditions       << Post.count(:id, :conditions => {:forum_id => forum_id})
       end
       # User doesn't have update_posts_count method in SB2, as reported by Ryan
-			#@voices.each &:update_posts_count if @voices
+      #@voices.each &:update_posts_count if @voices
       Forum.update_all forum_conditions, ['id = ?', forum_id]
       @old_forum_id = @voices = nil
     end

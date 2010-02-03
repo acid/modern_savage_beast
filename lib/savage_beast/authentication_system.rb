@@ -12,7 +12,7 @@ module SavageBeast::AuthenticationSystem
     # this could be a filter for the entire app and keep with it's true meaning, but that 
     # would just slow things down without any forseeable benefit since we already know 
     # who is online from the user/session connection 
-    #
+    #pg
     # This is now also used to show which users are online... not at accurate as the
     # session based approach, but less code and less overhead.
     def update_last_seen_at
@@ -42,6 +42,6 @@ module SavageBeast::AuthenticationSystem
     end
     
     def admin?
-      #logged_in? && current_user.admin?
+      logged_in? && current_user.admin?
     end
 end
