@@ -53,7 +53,9 @@
       <% if forum.recent_post %>
         <%= time_ago_in_words(forum.recent_post.created_at) %><br />
         <%= 'by {user}'[:by_user,"<strong>#{h(forum.recent_post.user.display_name)}</strong>"] %>
+        <% if forum.recent_post.topic %>
         <span>(<%= link_to 'view'[], forum_topic_path(:forum_id => forum, :id => forum.recent_post.topic_id, :page => forum.recent_post.topic.last_page, :anchor => forum.recent_post.dom_id) %>)</span>
+        <% end %>
       <% end %>
     </td>
   </tr>
