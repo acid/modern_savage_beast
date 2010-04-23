@@ -14,6 +14,14 @@ module SavageBeast
 		end
 =end
 
+    def post_count count
+      count==1 ? t("savage_beast.post_count_found", :count => number_with_delimiter(count)) : t("savage_beast.posts_count_found", :count => number_with_delimiter(count))
+    end
+
+    def topic_count count
+      count==1 ? t("savage_beast.topic_count_found", :count => number_with_delimiter(count)) : t("savage_beast.topics_count_found", :count => number_with_delimiter(count))
+    end
+
 		def ajax_spinner_for(id, spinner="spinner.gif")
 			"<img src='/plugin_assets/savage-beast/images/#{spinner}' style='display:none; vertical-align:middle;' id='#{id.to_s}_spinner'> "
 		end
@@ -41,7 +49,7 @@ module SavageBeast
 		end
 
 		def search_posts_title
-			returning(params[:q].blank? ? 'Recent Posts'[] : "Searching for"[] + " '#{h params[:q]}'") do |title|
+			returning(params[:q].blank? ? t('savage_beast.recent_posts') : t("savage_beast.searching_for") + " '#{h params[:q]}'") do |title|
 				title << " "+'by {user}'[:by_user,h(User.find(params[:user_id]).display_name)] if params[:user_id]
 				title << " "+'in {forum}'[:in_forum,h(Forum.find(params[:forum_id]).name)] if params[:forum_id]
 			end

@@ -19,6 +19,9 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
+    respond_to do |format|
+      format.html
+    end
   end
   
   def show

@@ -1,7 +1,7 @@
 class ForumsController < ApplicationController
 	before_filter :login_required, :except => [:index, :show]
   before_filter :find_or_initialize_forum, :except => :index
-	before_filter :admin?, :except => [:show, :index]
+	prepend_before_filter :admin?, :except => [:show, :index]
 
   cache_sweeper :posts_sweeper, :only => [:create, :update, :destroy]
 
@@ -40,6 +40,12 @@ class ForumsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @forum }
       format.xml  { head :created, :location => forum_url(@forum, :format => :xml) }
+    end
+  end
+
+  def new
+    respond_to do |format|
+      format.html
     end
   end
 
