@@ -54,17 +54,17 @@
         - post = t("savage_beast.comma_locked_topic")
         - color = "darkgrey"
       - if recent_topic_activity(topic)
-        = image_tag "savage_beast/clearbits/#{icon}.gif", :class => "icon green", :title => "Recent activity"[]+"#{post}"
+        = image_tag "savage_beast/clearbits/#{icon}.gif", :class => "icon green", :title => t("savage_beast.recent_activity")+"#{post}"
       - else
-        = image_tag "savage_beast/clearbits/#{icon}.gif", :class => "icon grey #{color}", :title => "No recent activity"[]+"#{post}"
+        = image_tag "savage_beast/clearbits/#{icon}.gif", :class => "icon grey #{color}", :title => t("savage_beast.no_recent_activity")+"#{post}"
       %td.c2
         = t("savage_beast.sticky_title")+": <strong>" if topic.sticky?
-        = topic_title_link(topic), {:class => "entry-title", :rel => "bookmark" }
+        = topic_title_link(topic, {:class => "entry-title", :rel => "bookmark" })
         - #= link_to h(topic.title), topic_path(@forum, topic), :class => "entry-title", :rel => "bookmark"
         = "</strong>" if topic.sticky?
         - if topic.paged?
           %small
-            = link_to 'last'[], forum_topic_path(:forum_id => @forum, :id => topic, :page => topic.last_page)
+            = link_to t("savage_beast.last"), forum_topic_path(:forum_id => @forum, :id => topic, :page => topic.last_page)
       %td.ca.inv.stat
         = topic.posts.size
       %td.ca.inv.stat
@@ -72,9 +72,11 @@
       %td.lp
         %abbr.updated{ :title => topic.replied_at.xmlschema }
           = time_ago_in_words(topic.replied_at)
-        = 'by {user}'[:by_user, "<span class=\"author\"><strong class=\"fn\">#{h(topic.replied_by_user.display_name)}</strong></span>"]
+        %span.author
+          %strong.fn
+            = t("savage_beast.by_user", :user => h(topic.replied_by_user.display_name))
         %span
-          = link_to 'view'[], forum_topic_path(:forum_id => @forum, :id => topic, :page => topic.last_page, :anchor => "posts-#{topic.last_post_id}")
+          = link_to t("savage_beast.view"), forum_topic_path(:forum_id => @forum, :id => topic, :page => topic.last_page, :anchor => "posts-#{topic.last_post_id}")
 = will_paginate @topics
 - if logged_in?
   %p

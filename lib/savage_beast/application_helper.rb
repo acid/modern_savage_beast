@@ -15,11 +15,15 @@ module SavageBeast
 =end
 
     def post_count count
-      count==1 ? t("savage_beast.post_count_found", :count => number_with_delimiter(count)) : t("savage_beast.posts_count_found", :count => number_with_delimiter(count))
+      count==1 ? t("savage_beast.post_count", :count => number_with_delimiter(count)) : t("savage_beast.posts_count", :count => number_with_delimiter(count))
     end
 
     def topic_count count
-      count==1 ? t("savage_beast.topic_count_found", :count => number_with_delimiter(count)) : t("savage_beast.topics_count_found", :count => number_with_delimiter(count))
+      count==1 ? t("savage_beast.topic_count", :count => number_with_delimiter(count)) : t("savage_beast.topics_count", :count => number_with_delimiter(count))
+    end
+
+    def show_mods
+      { :onmouseover => "$('topic_mod').show();", :onmouseout => "$('topic_mod').hide();" } if logged_in?
     end
 
 		def ajax_spinner_for(id, spinner="spinner.gif")

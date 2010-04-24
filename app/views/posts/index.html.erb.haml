@@ -3,7 +3,7 @@
   - if params[:q].blank?
     = @page_title
   - else
-    = 'Searching for'[]
+    = t("savage_beast.searching_for")
     '
     = h params[:q]
     '
@@ -29,7 +29,7 @@
         %span.fn
           = link_to truncate(h(@users[post.user_id].display_name), 15), user_path(post.user_id)
         %span.posts
-          = '{count} posts'[(count=@users[post.user_id].posts.size)==1 ? :post_count : :posts_count, number_with_delimiter(count)]
+          = post_count @users[post.user_id].posts.size
       %td.body.entry-content
         %p.topic
           = t("savage_beast.topic_title")

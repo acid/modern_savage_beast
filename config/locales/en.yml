@@ -2,7 +2,7 @@ en:
   savage_beast:
     beast_title: "Beast"
     beast_sidebar_title: "What is Beast?"
-    beast_sidebar_body: A small, light-weight forum in Rails with a scary name and a goal of around 500 lines of code when we're done.
+    beast_sidebar_body: "A small, light-weight forum in Rails with a scary name and a goal of around 500 lines of code when we`re done."
     beast_welcome: Welcome to Beast
     
     forum_title: Forum
@@ -18,9 +18,10 @@ en:
     topic_title: Topic
     Topics_title: Topics
     edit_topic: Edit topic
+    delete_topic: Delete topic
     new_topic: New topic
-    topic_posted_by: "{{title}} posted by {{user} @ {{date}"
-    topic_replied_by: "{{title}} replied by {{user} @ {{date}"
+    topic_posted_by: "{{title}} posted by {{user}} @ {{date}}"
+    topic_replied_by: "{{title}} replied by {{user}} @ {{date}}"
     locked_topic: This topic is locked
     monitoring_topic: Monitoring topic
     monitor_topic: Monitor topic
@@ -42,7 +43,7 @@ en:
     no_recent_activity: No recent activity
     users_online: Users Online
     change_login: Please change your login
-    gravatar_notice: To have your very own avatar displayed on this forum visit {{gravatar}} and sign up for a free gravatar.
+    gravatar_notice: "To have your very own avatar displayed on this forum visit {{gravatar}} and sign up for a free gravatar."
     change_email_or_password: Change e-mail or password
     name_or_login: Name / Login
     reset_password: Reset Password
@@ -62,8 +63,8 @@ en:
     next_page: Next Page
     next: "Next &raquo;"
     previous: "&laquo; Previous"
-    topics_count: "{{count}} topic(s)"
-    posts_count: "{{count}} post(s)"
+    topics_count: "{{count}} topics"
+    posts_count: "{{count}} posts"
     voices_count: "{{count}} voice(s)"
     posts_count_found: "{{count}} post(s) found"
     cancel: cancel
@@ -104,12 +105,12 @@ en:
     email_submit: E-mail me the link
     powered_by: Powered by
     and: and
-    users_monitored_topics: "{{name}}'s Monitored Topics"
+    users_monitored_topics: "{{name}}s Monitored Topics"
     delete: delete
     activation: Please visit the link below to activate your account.
     without_http: without http://
     admin_in_parens: '(admin)'
-    admin_and_moderation: Admin &amp; Moderation
+    admin_and_moderation: "Admin & Moderation"
     remove_moderated_forum: This user can moderate the following forums.  Click one to remove.
     remove_user_as_moderator: Remove user as moderator for
     searching_for: Searching for
@@ -121,7 +122,7 @@ en:
     and_again: and again
     
     open_id_field: Enter your OpenID Identity Url if you know it
-    open_id_field_extended: "Enter your OpenID Identity Url if you know it.  If your Identity Url supports the {{sreg}} extension, you can {{login_link} and create your account automatically"
+    open_id_field_extended: "Enter your OpenID Identity Url if you know it.  If your Identity Url supports the {{sreg}} extension, you can {{login_link}} and create your account automatically"
     login_field: Logins should start with least 2 characters and may consist of letters, numbers, or the underscore.
     password_field: Enter your desired password twice.  It must be at least 5 characters.
     

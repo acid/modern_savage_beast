@@ -3,7 +3,7 @@
     %h6
       = t("savage_beast.admin_title")
     %p
-      = link_to 'Create New Forum'[:create_new_forum], new_forum_path, :class => "utility"
+      = link_to t("savage_beast.create_new_forum"), new_forum_path, :class => "utility"
 %h1{ :style => "margin-top:0;" }
   = t("savage_beast.forums_title")
 /
@@ -21,14 +21,14 @@
       <th width="5%">Topics</th>
       <th width="5%">Posts</th>
     %th.la{ :width => "30%", :colspan => "1" }
-      = 'Last Post'[:last_post]
+      = t("savage_beast.last_post")
   - for forum in @forums do
     %tr
       %td.vat.c1
         - if recent_forum_activity(forum)
-          = image_tag "savage_beast/clearbits/comment.gif", :class => "icon green", :title => 'Recent activity'[:recent_activity]
+          = image_tag "savage_beast/clearbits/comment.gif", :class => "icon green", :title => t("savage_beast.recent_activity")
         - else
-          = image_tag "savage_beast/clearbits/comment.gif", :class => "icon grey", :title => 'No recent activity'[:no_recent_activity]
+          = image_tag "savage_beast/clearbits/comment.gif", :class => "icon grey", :title => t("savage_beast.no_recent_activity")
       %td.c2.vat
         = link_to h(forum.name), forum_path(forum), :class => "title"
         .posts
@@ -43,14 +43,15 @@
         - if forum.recent_post
           = time_ago_in_words(forum.recent_post.created_at)
           %br
-            = 'by {user}'[:by_user,"<strong>#{h(forum.recent_post.user.display_name)}</strong>"]
+          %strong
+            = t('savage_beast.by_user', :user => h(forum.recent_post.user.display_name))
           - if forum.recent_post.topic
             %span
               (
-              = link_to 'view'[], forum_topic_path(:forum_id => forum, :id => forum.recent_post.topic_id, :page => forum.recent_post.topic.last_page, :anchor => forum.recent_post.dom_id)
+              = link_to t("savage_beast.view"), forum_topic_path(:forum_id => forum, :id => forum.recent_post.topic_id, :page => forum.recent_post.topic.last_page, :anchor => forum.recent_post.dom_id)
               )
 %p
-  = link_to 'Recent posts'[:recent_posts], all_posts_path
+  = link_to t("savage_beast.recent_posts"), all_posts_path
 - online_users = User.currently_online
 - unless !online_users || online_users.empty?
   .stats
