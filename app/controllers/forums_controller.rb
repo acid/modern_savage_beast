@@ -49,6 +49,12 @@ class ForumsController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def update
     @forum.update_attributes!(params[:forum])
     respond_to do |format|
