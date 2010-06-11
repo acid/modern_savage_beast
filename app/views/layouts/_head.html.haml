@@ -1,7 +1,7 @@
 #header
   %ul#nav
     %li
-      = link_to t("savage_beast.forums_title"), forums_path, :rel => 'home'
+      = link_to t("savage_beast.forums_title"), forums_forums_path, :rel => 'home'
     %li
       = link_to t("savage_beast.users_title"), users_path
     %li#search
@@ -12,4 +12,4 @@
     %li.login
       = beast_user_link
   %h1
-    = link_to t("savage_beast.beast_title"), forums_path
+    = link_to t("savage_beast.beast_title"), forums_forums_path

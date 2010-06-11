@@ -62,9 +62,9 @@ module SavageBeast
 		def topic_title_link(topic, options)
 			if topic.title =~ /^\[([^\]]{1,15})\]((\s+)\w+.*)/
 				"<span class='flag'>#{$1}</span>" +
-				link_to(h($2.strip), forum_topic_path(@forum, topic), options)
+				link_to(h($2.strip), forums_forum_topic_path(@forum, topic), options)
 			else
-				link_to(h(topic.title), forum_topic_path(@forum, topic), options)
+				link_to(h(topic.title), forums_forum_topic_path(@forum, topic), options)
 			end
 		end
 

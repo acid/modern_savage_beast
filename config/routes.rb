@@ -1,18 +1,19 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :posts, :name_prefix => 'all_', :collection => { :search => :get }
-	map.resources :forums, :topics, :posts, :monitorship
-
-  %w(forum).each do |attr|
-    map.resources :posts, :name_prefix => "#{attr}_", :path_prefix => "/#{attr.pluralize}/:#{attr}_id"
-  end
+  map.forums '/forums', :controller => 'forums/forums', :action => :index
+  map.namespace :forums do |forum|
+    forum.resources :posts, :name_prefix => 'all_', :collection => { :search => :get }
+  	forum.resources :forums, :topics, :posts, :monitorship
   
-  map.resources :forums do |forum|
-    forum.resources :topics do |topic|
-      topic.resources :posts
-      topic.resource :monitorship, :controller => :monitorships
+    %w(forum).each do |attr|
+      forum.resources :posts, :name_prefix => "#{attr}_", :path_prefix => "/#{attr.pluralize}/:#{attr}_id"
+    end
+    
+    forum.resources :forums do |forum|
+      forum.resources :topics do |topic|
+        topic.resources :posts
+        topic.resource :monitorship, :controller => :monitorships
+      end
     end
   end
 
-# screws up default / defined by the application    
-#  map.forum_home '', :controller => 'forums', :action => 'index'
 end
