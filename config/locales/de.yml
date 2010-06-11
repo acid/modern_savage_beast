@@ -1,4 +1,4 @@
-en:
+de:
   savage_beast:
     beast_title: "Biest"
     beast_sidebar_title: "Was ist das Biest?"
@@ -34,7 +34,7 @@ en:
     edit_post: Beitrag editieren
     delete_post: Beitrag löschen
     last_post: Letzter Beitrag
-    recent_posts: Neuester Beitrag
+    recent_posts: Neueste Beiträge
     
     voices_title: Meinungen
     monitor_title: Beobachten
