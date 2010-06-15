@@ -1,26 +1,42 @@
-=== Savage Beast ===
+=== Modern Savage Beast ===
 
-Savage Beast is a Rails Message forum plugin based on the popular Beast plugin.
+Modern Savage Beast is a refreshing in the templating techniques, used in Savage
+Beast. Savage Beast is a Rails Message forum plugin based on the popular Beast plugin.
 The Savage Beast plugin has been installed in hundreds of Rails sites, partially
 because it's the only viable choice for a message forum plugin, but also because
 it incorporates a lot of features that would be a time-consuming headache for you
 to implement yourself.
 
-This version of Savage Beast has been tested working in Rails 2.3 without
-the Engines plugin, and in Rails 2.0-2.2 with use of the Engines plugin.
+This version of ModernSavage Beast has been tested working in Rails 2.3.
 
-See http://www.williambharding.com/blog/rails/savage-beast-23-a-rails-22-23-message-forum-plugin/ for install instructions
+=== Installation ===
 
-Please post any comments or suggestions to the blog post.  If you would like
-to make a contribution to improve this plugin, send me an email via the site.
+git submodule add git://github.com/acid/modern_savage_beast.git vendor/plugins/modern_savage_beast
 
-=== On Rails 2.2 and Earlier ===
-If you're rolling Rails 2.2 or earlier, be sure you carefully follow the
-Engines installation instructions!  That
-line to add to your environment file is easily missed.
+rake savage_beast:bootstrap_db
+rake savage_beast:bootstrap_assets
+rake savage_beast:add_gems
+rake savage_beast:add_includes #assumes that your User-Model is called user.rb
 
-=== On Rails 2.0 ===
-If you're running Rails 2.0, you're probably better off using the version
-at http://code.google.com/p/savage-beast-2/, which was specifically tested with
-Rails 2.0.
+Implement in your User-Model:
+
+display_name
+admin?
+currently_online
+
+In your Application-Controller you will need:
+
+current_user
+login_required
+admin?
+logged_in?
+authorized?
+
+After That your forum should be up and ready, you could reach it over server.tld/forums.
+Feel free to overwrite parts of the Forum for your own needs. All of modern_savage_beast's controllers and views are in the Forums-Namespace.
+
+Feel also free to contribute or ask me some questions. More Information is definitely to come in the Future! :)
+
+
+For additional information on the old savage Beast roots, see http://www.williambharding.com/blog/rails/savage-beast-23-a-rails-22-23-message-forum-plugin/ for install instructions
 
