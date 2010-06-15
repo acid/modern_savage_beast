@@ -30,6 +30,7 @@ will_paginate
 white_list
 white_list_formatted_content
 acts_as_list
+acts_as_taggable_on
 
 Implement in your User-Model:
 
