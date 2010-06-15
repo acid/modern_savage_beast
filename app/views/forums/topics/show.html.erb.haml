@@ -34,7 +34,7 @@
   - if @topic.locked?
     %span
       (
-      = 'locked'[]
+      = t('savage_beast.locked')
       )
   - if logged_in?
     %span#topic_mod{ :style => "display:none;" }
@@ -120,9 +120,7 @@
               %ul.help
                 %li
                   = t("savage_beast.formatting_bold")
-                  \&nbsp; &nbsp; &nbsp;
                   = t("savage_beast.formatting_italics")
-                  \&nbsp; &nbsp; &nbsp;
                   %br
                   = t("savage_beast.formatting_blockquote")
                 %li
