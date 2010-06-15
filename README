@@ -14,11 +14,22 @@ This version of ModernSavage Beast has been tested working in Rails 2.3.
 === Installation ===
 
 git submodule add git://github.com/acid/modern_savage_beast.git vendor/plugins/modern_savage_beast
+git submodule update --init
 
-rake savage_beast:bootstrap_db
-rake savage_beast:bootstrap_assets
-rake savage_beast:add_gems
-rake savage_beast:add_includes #assumes that your User-Model is called user.rb
+> rake savage_beast:bootstrap_db
+> rake savage_beast:bootstrap_assets
+> rake savage_beast:add_gems
+> rake savage_beast:add_includes #assumes that your User-Model is called user.rb
+
+You could install all missing gems with
+
+> rake gems:install
+
+You will also need a bunch of other plugins to use MSB:
+will_paginate
+white_list
+white_list_formatted_content
+acts_as_list
 
 Implement in your User-Model:
 
@@ -40,5 +51,5 @@ Feel free to overwrite parts of the Forum for your own needs in the application.
 Feel also free to contribute or ask me some questions. More Information is definitely to come in the Future! :)
 
 
-For additional information on the old savage Beast roots, see http://www.williambharding.com/blog/rails/savage-beast-23-a-rails-22-23-message-forum-plugin/ for install instructions
+For additional information on the old savage Beast roots, see http://www.williambharding.com/blog/rails/savage-beast-23-a-rails-22-23-message-forum-plugin/
 
