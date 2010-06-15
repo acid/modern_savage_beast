@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.forums '/forums', :controller => 'forums/forums', :action => :index
-  map.namespace :forums do |forum|
+  map.subdomain :forums do |forum|
     forum.resources :posts, :name_prefix => 'all_', :collection => { :search => :get }
   	forum.resources :forums, :topics, :posts, :monitorship
   
