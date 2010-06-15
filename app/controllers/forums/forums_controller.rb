@@ -38,7 +38,7 @@ class Forums::ForumsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to @forum }
+      format.html { redirect_to forums_forum_path(@forum) }
       format.xml  { head :created, :location => forum_url(@forum, :format => :xml) }
     end
   end
@@ -58,7 +58,7 @@ class Forums::ForumsController < ApplicationController
   def update
     @forum.update_attributes!(params[:forum])
     respond_to do |format|
-      format.html { redirect_to @forum }
+      format.html { redirect_to forums_forum_path(@forum) }
       format.xml  { head 200 }
     end
   end
@@ -66,7 +66,7 @@ class Forums::ForumsController < ApplicationController
   def destroy
     @forum.destroy
     respond_to do |format|
-      format.html { redirect_to forums_path }
+      format.html { redirect_to forums_forums_path }
       format.xml  { head 200 }
     end
   end
