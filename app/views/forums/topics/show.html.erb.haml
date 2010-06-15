@@ -6,9 +6,9 @@
   %ul.flat.talking
     - @topic.voices.each do |user|
       %li
-        = link_to h(user.display_name), user_path(user)
+        = link_to h(user.display_name), www_user_path(:subdomain => :www, :id => user.id)
 - if logged_in?
-  - form_tag forums_forum_topic_monitorship_path(@forum, @topic), :style => 'margin-top:0em; float:right;' do
+  - form_tag forums_forum_topic_monitorship_path(@forum, @topic), :html => { :style => 'margin-top:0em; float:right;', :id => 'form' } do
     %div
       - mon =  @monitoring ? true : false
       =check_box_tag "monitor", '', mon, :onclick => js_for_monitor
@@ -67,7 +67,7 @@
               = time_ago_in_words(post.created_at)
         = avatar_for post.user
         %span.fn
-          = link_to truncate(h(post.user.display_name), :length => 15), user_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil)
+          = link_to truncate(h(post.user.display_name), :length => 15), www_user_path(:subdomain => :www, :id => post.user.id), :class => (post.user == @posts.first.user ? "threadauthor" : nil)
         - if post.user.admin? or post.forum.moderators.include?(post.user)
           %span.admin
             - if post.user.admin?
@@ -88,7 +88,7 @@
       %td.body.entry-content{ :id => "post-body-#{post.id}" }
         /
           <haml:loud> link_to_function image_tag('clearbits/comment.gif', :class =&amp;gt; 'icon reply'), &amp;quot;$('reply').toggle()&amp;quot; if logged_in? </haml:loud>
-        = post.body_html
+        = post.body
 = will_paginate @posts
 - if logged_in?
   #edit
@@ -99,41 +99,9 @@
       = t("savage_beast.locked_topic")
   - else
     %p
-      = link_to_function t("savage_beast.reply_to_topic"), "ReplyForm.init()", :class => "utility"
+      = link_to t("savage_beast.reply_to_topic"), "#", :id => "reply_to"
     #reply.editbox
-      .container
-        = content_tag 'p', h(flash[:bad_reply]), :class => 'notice' if flash[:bad_reply]
-        - form_for :post, :url => forums_posts_path(:forum_id => @forum, :topic_id => @topic, :page => @topic.last_page) do |f|
-          %table{ :cellspacing => "0", :border => "0", :width => "100%", :cellpadding => "0" }
-          %tr
-            %td
-              = f.text_area :body, :rows => 4
-          %tr
-            %td
-              %label
-                Tags:
-              = f.text_field :body_list
-          %tr
-            %td{ :valign => "top" }
-              %h5
-                = t('savage_beast.formatting_help')
-              %ul.help
-                %li
-                  = t("savage_beast.formatting_bold")
-                  = t("savage_beast.formatting_italics")
-                  %br
-                  = t("savage_beast.formatting_blockquote")
-                %li
-                  "IBM":http://www.ibm.com
-                %li
-                  = t("savage_beast.formatting_list")
-          %tr
-            %td{ :valign => "bottom", :style => "padding-bottom:15px;" }
-              = submit_tag t("savage_beast.save_reply")
-              %span.button_or
-                or
-                = link_to_function t('savage_beast.cancel'), "$('reply').hide()"
-= javascript_tag "$('reply').hide();"
+        
 .crumbs{ :style => "margin-top:1.1em;" }
   = link_to t("savage_beast.forums_title"), forums_forums_path
   %span.arrow
@@ -141,3 +109,5 @@
   = link_to h(@topic.forum.name), forums_forum_path(@topic.forum)
   %span.arrow
     \&rarr;
+
+= javascript_tag additional_js

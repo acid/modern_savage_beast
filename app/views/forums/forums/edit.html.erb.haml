@@ -4,8 +4,8 @@
     \&rarr;
 %h1
   = t("savage_beast.edit_forum")
-- form_for :forum, :url  => forums_forum_path(@forum), :html => { :method => :put } do |f|
+- form_for :forum, :url  => forums_forum_path(@forum), :html => { :method => :put, :id => 'form' } do |f|
   = render :partial => "form", :object => f
-  = submit_tag t("savage_beast.save_forum")
-  or
-  = link_to(t("savage_beast.cancel"), forums_forums_path)
+  %fieldset
+    = submit_tag t("savage_beast.save_forum")
+    = link_to(t("savage_beast.cancel"), forums_forums_path)

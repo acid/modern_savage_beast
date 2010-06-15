@@ -9,7 +9,7 @@
   %ul.flat{ :style => "margin-top:1em;" }
     - @forum.moderators.each do |user|
       %li
-        = link_to user.display_name, user_path(user)
+        = link_to user.display_name, www_user_path(user)
 - else
   %p
     = t("savage_beast.forum_is_unmoderated")

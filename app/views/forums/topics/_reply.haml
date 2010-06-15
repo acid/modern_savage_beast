@@ -1,0 +1,24 @@
+= content_tag 'p', h(flash[:bad_reply]), :class => 'notice' if flash[:bad_reply]
+- form_for :post, :url => forums_posts_path(:forum_id => @forum, :topic_id => @topic, :page => @topic.last_page), :html => { :id => 'form', :class => 'forums'} do |f|
+  #edit_left
+    = f.label :body, t('savage_beast.post_title')
+    = f.text_area :body, :rows => 4
+    %label
+      = t('savage_beast.tags')
+    = f.text_field :body_list
+  #edit_right
+    %h5
+      = t('savage_beast.formatting_help')
+    %ul.help
+      %li
+        = t("savage_beast.formatting_bold")
+      %li
+        = t("savage_beast.formatting_italics")
+      %li
+        = t("savage_beast.formatting_blockquote")
+      %li
+        = t("savage_beast.formatting_list")
+  = submit_tag t("savage_beast.save_reply"), :id => 'btn_go_on'
+  %span.button_or
+    = link_to_function t('savage_beast.cancel'), "$('#reply').html('')"
+
