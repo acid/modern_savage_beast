@@ -8,7 +8,7 @@ Debugger.start
 SAVAGE_BEAST_BASE_DIR = File.join(File.dirname(__FILE__), "../..")
 
 namespace :savage_beast do 
-	desc "Add database tables for bloggity"
+	desc "Add database tables for modern_savage_beast"
 	task :bootstrap_db => :environment do
     migration_path = RAILS_ROOT + "/db/migrate/#{Time.now.utc.strftime("%Y%m%d%H%M%S")}_create_savage_tables.rb"
     savage_beast_migration = File.join(SAVAGE_BEAST_BASE_DIR, 'db/migrate/', '001_create_savage_tables.rb')
@@ -19,7 +19,7 @@ namespace :savage_beast do
 	desc "Copy the stylesheets and Javascripts used natively by bloggity into host app's public directory"
 	task :bootstrap_assets => :environment do
 		destination_root = RAILS_ROOT + "/public/"
-    %w(stylesheets images).each{|asset|
+    %w(stylesheets images javascripts).each{|asset|
       destination_path = destination_root + asset
       FileUtils.mkpath(destination_path) unless File.exists?(destination_path)
       FileUtils.mkpath(destination_path + "/savage_beast") unless File.exists?(destination_path + "/savage_beast")
@@ -29,8 +29,33 @@ namespace :savage_beast do
       end
     }
 		puts "Files successfully copied!"
-	end
 
+  end
+
+  desc "Adds modern_savage_beasts gem requirements to enviroment.rb"
+  task :add_gems => :environment do
+    required_gems = "config.gem 'RedCloth'"
+    look_for = 'Rails::Initializer.run do |config|'
+    gsub_file 'config/environment.rb', /(#{Regexp.escape(look_for)})/mi do |match|
+      "#{match}\n #{required_gems}\n"
+    end
+  end
+
+  desc "Add includes for modern_savage_beast in application_helper and models/user"
+  task :add_includes => :environment do
+    inserts = [ [ "include SavageBeast::UserInit", "app/models/user.rb", "class User < ActiveRecord::Base"],
+                [ "include SavageBeast::ApplicationHelper", "app/helpers/application_helper.rb", "module ApplicationHelper"] ]
+    inserts.each do |i|
+      gsub_file i[1], /(#{Regexp.escape(i[2])})/mi do |match|
+        "#{match}\n #{i[0]}\n"
+      end
+    end
+  end
+
+  def gsub_file(path, regexp, *args, &block)
+    content = File.read(path).gsub(regexp, *args, &block)
+    File.open(path, 'wb') { |file| file.write(content) }
+  end
 
 =begin
 	desc "Run all Bloggity tests"
