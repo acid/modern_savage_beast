@@ -8,4 +8,12 @@ module Forums::TopicsHelper
               }"
   end
 
+  def  additional_js
+    script = "$(document).ready(function() {
+                $('#reply_to').click(function(event){
+                  event.preventDefault();
+                  created = $('#reply').append('#{escape_javascript(render :partial => "reply")}');
+                });
+              });"
+  end
 end
