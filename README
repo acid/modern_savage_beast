@@ -1,7 +1,9 @@
 === Modern Savage Beast ===
 
-Modern Savage Beast is a refreshing in the templating techniques, used in Savage
-Beast. Savage Beast is a Rails Message forum plugin based on the popular Beast plugin.
+Modern Savage Beast is a revision of the old Savage Beast Plugin.
+Most of the work where done in the views (haml) and the text-system 
+(bye gettext/gibberish, hello I18n api!).
+Savage Beast is a Rails Message forum plugin based on the popular Beast plugin.
 The Savage Beast plugin has been installed in hundreds of Rails sites, partially
 because it's the only viable choice for a message forum plugin, but also because
 it incorporates a lot of features that would be a time-consuming headache for you
@@ -32,8 +34,8 @@ admin?
 logged_in?
 authorized?
 
-After That your forum should be up and ready, you could reach it over server.tld/forums.
-Feel free to overwrite parts of the Forum for your own needs. All of modern_savage_beast's controllers and views are in the Forums-Namespace.
+After you've done that, your forum should be up and ready, you could reach it over server.tld/forums.
+Feel free to overwrite parts of the Forum for your own needs in the application. All of modern_savage_beast's controllers and views are in the Forums-Namespace.
 
 Feel also free to contribute or ask me some questions. More Information is definitely to come in the Future! :)
 
