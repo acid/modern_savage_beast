@@ -4,7 +4,7 @@
     \&rarr;
 %h1
   = t("savage_beast.new_forum")
-- form_for :forum, :url => forums_forums_path, :html => { :id => 'form', :class => 'forums' } do |f|
+- form_for :forum, :url => forums_forums_path, :html => { :id => 'form', :class => 'forums', :method => :post } do |f|
   = render :partial => "form", :object => f
   = submit_tag t("savage_beast.create_new_forum"), :id => 'btn_go_on'
   = t("savage_beast.or")
