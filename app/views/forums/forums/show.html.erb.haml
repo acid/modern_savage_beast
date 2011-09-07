@@ -47,16 +47,16 @@
   - for topic in @topics
     %tr.hentry
       %td.c1{ :style => "padding:5px; width:16px;" }
-      - icon = "comment"
-      - color = ""
-      - if topic.locked?
-        - icon = "lock"
-        - post = t("savage_beast.comma_locked_topic")
-        - color = "darkgrey"
-      - if recent_topic_activity(topic)
-        = image_tag "savage_beast/clearbits/#{icon}.gif", :class => "icon green", :title => t("savage_beast.recent_activity")+"#{post}"
-      - else
-        = image_tag "savage_beast/clearbits/#{icon}.gif", :class => "icon grey #{color}", :title => t("savage_beast.no_recent_activity")+"#{post}"
+        - icon = "comment"
+        - color = ""
+        - if topic.locked?
+          - icon = "lock"
+          - post = t("savage_beast.comma_locked_topic")
+          - color = "darkgrey"
+        - if recent_topic_activity(topic)
+          = image_tag "savage_beast/clearbits/#{icon}.gif", :class => "icon green", :title => t("savage_beast.recent_activity")+"#{post}"
+        - else
+          = image_tag "savage_beast/clearbits/#{icon}.gif", :class => "icon grey #{color}", :title => t("savage_beast.no_recent_activity")+"#{post}"
       %td.c2
         = t("savage_beast.sticky_title")+": <strong>" if topic.sticky?
         = topic_title_link(topic, {:class => "entry-title", :rel => "bookmark" })
